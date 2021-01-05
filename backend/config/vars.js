@@ -7,8 +7,8 @@ const database = {
 //   PORT: process.env.PORT,
 // };
 
-// const secretKey = {
-//   JWT_SECRET: process.env.JWT_SECRET,
-// };
+const secretKey = {
+  JWT_SECRET: process.env.JWT_SECRET,
+};
 
-export { database };
+export { database ,secretKey};
