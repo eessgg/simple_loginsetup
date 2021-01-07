@@ -1,7 +1,6 @@
 import express from 'express';
 const router = express();
 
-
 import { userById } from '../controllers/user_controller.js'
 import { requireSignin, isAdmin, isAuth } from '../controllers/auth_controller.js';
 

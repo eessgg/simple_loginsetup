@@ -7,11 +7,11 @@ const register = async (req, res) => {
   try {
     let {username, email, password} = req.body;
     if(!username || !email || !password) {
-      res.status(400).json({message: "Preencha os campos."})
+      return res.status(400).json({message: "Preencha os campos."})
     }
 
     if(username.length < 5) {
-      res.status(400).json({message: "Usuário precisa mais de cinco chars."})
+      return res.status(400).json({message: "Usuário precisa mais de cinco chars."})
     }
 
     const existingUser = await User.findOne({email})
@@ -22,8 +22,7 @@ const register = async (req, res) => {
       username, email, password
     })
     const savedUser = await newUser.save()
-    return res.json(savedUser)
-  
+    return res.json(savedUser)  
   } catch (error) {
     res.status(500).json({ error });
     throw error;
