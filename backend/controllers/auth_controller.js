@@ -56,17 +56,6 @@ const login = (req, res) => {
 const logout = (req, res) => {
   res.clearCookie("t", {path:'/'});
   res.json({ message: 'logout success' });
-  // if (req.session) {
-  //   req.session.destroy((err) => {
-  //     if (err) {
-  //       next(err)
-  //     } else {
-  //       res.clearCookie('t')
-  //       res.redirect('/')
-  //     }
-  //   })
-  // }
-
 };
 
 const getAllUsers = async (req, res) => {

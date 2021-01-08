@@ -100,6 +100,7 @@ const Signup = () => {
 
   return (
     <div className="container mt-5 col-md-5">
+      <h1>SignUp</h1>
       {showSuccess()}
       {showError()}
       {signForm()}
