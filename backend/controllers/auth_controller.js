@@ -6,22 +6,24 @@ import { secretKey } from '../config/vars.js';
 const register = async (req, res) => {
   try {
     let {username, email, password} = req.body;
+
+    // tests
     if(!username || !email || !password) {
       return res.status(400).json({message: "Preencha os campos."})
+    }    
+    if(username.length < 3) {
+      return res.status(400).json({message: "Usuário precisa mais de 03 chars."})
     }
-
-    if(username.length < 5) {
-      return res.status(400).json({message: "Usuário precisa mais de cinco chars."})
+    const isThereUser = await User.findOne({email})
+    if(isThereUser) {
+      res.status(400).json({message: "Email já registrado."});
     }
-
-    const existingUser = await User.findOne({email})
-    if(existingUser)
-      res.status(400).json({message: "Email já registrado."})
 
     const newUser = new User({
       username, email, password
     })
-    const savedUser = await newUser.save()
+    const savedUser = await newUser.save();
+
     return res.json(savedUser)  
   } catch (error) {
     res.status(500).json({ error });
@@ -30,29 +32,42 @@ const register = async (req, res) => {
 }
 
 const login = (req, res) => {
-  const { email, password, username } = req.body;
+  const { email, password } = req.body;
+    User.findOne({ email }, (err, user) => {
+        if (err || !user) {
+            return res.status(400).json({
+                error: 'User with that email does not exist. Please signup'
+            });
+        }
 
-  User.findOne({email}, (err, user) => {
-    if(err || !user) { 
-      return res.status(400).json({ message: err  })
-    }
-
-    if(!user.authenticate(password)) { 
-      return res.status(401).json({ message: "Email/password dont match" })
-    }
-
-    const token = jwt.sign({_id: user._id}, secretKey.JWT_SECRET);
-    res.cookie("t", token, {expire: new Date() + 9999});
-    
-    const { _id, username, email, role } = user;
-    return res.json({token, user: {_id, username, email, role}})
-  });
+        if (!user.authenticate(password)) {
+            return res.status(401).json({
+                error: 'Email and password dont match'
+            });
+        }
+        
+        const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET);
+        res.cookie('t', token, { expire: new Date() + 9999 });
+        const { _id, username, email, role } = user;
+        return res.json({ token, user: { _id, email, username, role } });
+    });
 }
 
-const signout = (req, res) => {
-  res.clearCookie("t")
-  res.json({message: "Signout success!"})
-}
+const logout = (req, res) => {
+  res.clearCookie("t", {path:'/'});
+  res.json({ message: 'logout success' });
+  // if (req.session) {
+  //   req.session.destroy((err) => {
+  //     if (err) {
+  //       next(err)
+  //     } else {
+  //       res.clearCookie('t')
+  //       res.redirect('/')
+  //     }
+  //   })
+  // }
+
+};
 
 const getAllUsers = async (req, res) => {
   const users = await User.find({})
@@ -100,7 +115,7 @@ export {
   register,
   getAllUsers,
   login,
-  signout,
+  logout,
   getUserById,
   requireSignin,
   isAuth,
