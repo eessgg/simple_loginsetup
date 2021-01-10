@@ -1,10 +1,10 @@
 .banner {
-  background: #536976;
-background: -webkit-linear-gradient(bottom, #536976, #292F49);
-background: -moz-linear-gradient(bottom, #536976, #292F49);
-background: linear-gradient(to top, #536976, #292F49);
-  color: white;
+  background: #ccccff68;
+background: -webkit-linear-gradient(top left, #ccccff68, #9fe2bf78);
+background: -moz-linear-gradient(top left,#ccccff68, #9fe2bf78);
+background: linear-gradient(to bottom right, #ccccff68, #9fe2bf78);
 
+  color: #808080;
 
   justify-content: center;
   align-items: center;
