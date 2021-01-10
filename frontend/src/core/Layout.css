@@ -1,0 +1,8 @@
+.layout-container {
+  background: #D4D7DD;
+background: -webkit-linear-gradient(bottom, #D4D7DD, #F7F8F8);
+background: -moz-linear-gradient(bottom, #D4D7DD, #F7F8F8);
+background: linear-gradient(to top, #D4D7DD, #F7F8F8);
+
+height: 100vh;
+}

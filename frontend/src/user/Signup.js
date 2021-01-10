@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 // import {API} from '../config';
 // import axios from 'axios';
 import {signup} from '../auth/index'
+import Banner from './../core/Banner';
+import Layout from '../core/Layout';
 
 const Signup = () => {
   const [values, setValues] = useState({
@@ -93,18 +95,21 @@ const Signup = () => {
           value={password}
         />
       </div>
-      <button className="btn btn-dark"
-        onClick={clickSubmit}>Submit</button>
+      <button className="btn btn-dark btn-lg my-3"  type="button"
+      onClick={clickSubmit}>Submit</button>
     </form>
   )
 
   return (
-    <div className="container mt-5 col-md-5">
-      <h1>SignUp</h1>
-      {showSuccess()}
-      {showError()}
-      {signForm()}
-    </div>
+    <Layout>
+      <Banner title="Signup Dashboard" description="Signup page for my app." />
+      <div className="container mt-5 col-md-5"></div>
+      <div className="container mt-5 col-md-5">
+        {showSuccess()}
+        {showError()}
+        {signForm()}
+      </div>
+    </Layout>
   );
 }
 

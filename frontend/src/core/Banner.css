@@ -1,0 +1,11 @@
+.banner {
+  background: #536976;
+background: -webkit-linear-gradient(bottom, #536976, #292F49);
+background: -moz-linear-gradient(bottom, #536976, #292F49);
+background: linear-gradient(to top, #536976, #292F49);
+  color: white;
+
+
+  justify-content: center;
+  align-items: center;
+}

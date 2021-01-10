@@ -1,10 +1,14 @@
 import React, {useState} from 'react';
 // import {API} from '../config';
 // import axios from 'axios';
-import {signin, authenticate} from '../auth/index'
-import {Link, Redirect} from 'react-router-dom'
+import {signin, authenticate, isAuthenticated} from '../auth/index'
+import {Redirect} from 'react-router-dom'
 
-const Signup = () => {
+import Banner from './../core/Banner';
+
+import Layout from '../core/Layout.js';
+
+const Signin = () => {
   const [values, setValues] = useState({
     email: '',
     password: '',
@@ -14,6 +18,7 @@ const Signup = () => {
   })
 
   const { email, password, error, loading, redirectToReferrer } = values;
+  const {user} = isAuthenticated()
 
   const handleChange = name => event => {
     setValues({
@@ -57,6 +62,13 @@ const Signup = () => {
 
   const redirectUser = () => {
     if(redirectToReferrer) {
+      if(user && user.role === 1) {
+        return <Redirect to="/admin/dashboard" />
+      } else {
+        return <Redirect to="/user/dashboard" />
+      }
+    }
+    if(isAuthenticated()) {
       return <Redirect to="/" />
     }
   }
@@ -85,22 +97,22 @@ const Signup = () => {
           value={password}
         />
       </div>
-      <button className="btn btn-dark"
+      <button className="btn btn-dark btn-lg my-3"  type="button"
         onClick={clickSubmit}>Submit</button>
     </form>
   )
 
   return (
-    <div className="container mt-5 col-md-5">
-      <h1>
-        Login
-      </h1>
-      {showLoading()}
-      {showError()}
-      {signForm()}
-      {redirectUser()}
-    </div>
+    <Layout>
+      <Banner title="Login Dashboard" description="Login page for my app." />
+      <div className="container col-md-5">
+        {showLoading()}
+        {showError()}
+        {signForm()}
+        {redirectUser()}
+      </div>
+    </Layout>
   );
 }
 
-export default Signup;
+export default Signin;
