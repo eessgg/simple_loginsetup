@@ -26,6 +26,7 @@ mongoose.connect(database.MONGO_URI, {
 // routes
 import authRoutes from './routes/auth_routes.js';
 import userRoutes from './routes/user_routes.js';
+import categoryRoutes from './routes/category_routes.js';
 
 // /api/users/register
 app.use('/api', authRoutes)
