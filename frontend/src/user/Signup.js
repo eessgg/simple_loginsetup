@@ -1,9 +1,11 @@
 import React, {useState} from 'react';
 // import {API} from '../config';
-// import axios from 'axios';
 import {signup} from '../auth/index'
 import Banner from './../core/Banner';
 import Layout from '../core/Layout';
+import {Link} from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Signup = () => {
   const [values, setValues] = useState({
@@ -55,8 +57,11 @@ const Signup = () => {
   )
 
   const showSuccess = () => (
+
     <div className="alert alert-info" style={{display: success ? '' : 'none'}}>
-      New Account
+      Novo usuário cadastrado. Faça o <Link to="/login">login</Link> aqui
+      {() => toast.success('Mensagem de sucesso')}
+      <ToastContainer />
     </div>
   )  
 
@@ -95,7 +100,7 @@ const Signup = () => {
           value={password}
         />
       </div>
-      <button className="btn btn-dark btn-lg my-3"  type="button"
+      <button className="btn btn-secondary btn-lg my-3"  type="button"
       onClick={clickSubmit}>Submit</button>
     </form>
   )
@@ -103,7 +108,7 @@ const Signup = () => {
   return (
     <Layout>
       <Banner title="Signup Dashboard" description="Signup page for my app." />
-      <div className="container mt-5 col-md-5"></div>
+
       <div className="container mt-5 col-md-5">
         {showSuccess()}
         {showError()}

@@ -30,6 +30,7 @@ import userRoutes from './routes/user_routes.js';
 // /api/users/register
 app.use('/api', authRoutes)
 app.use('/api', userRoutes)
+app.use('/api', categoryRoutes)
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server working on ${PORT}`))

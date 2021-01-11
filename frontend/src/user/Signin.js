@@ -97,7 +97,7 @@ const Signin = () => {
           value={password}
         />
       </div>
-      <button className="btn btn-dark btn-lg my-3"  type="button"
+      <button className="btn btn-secondary btn-lg my-3"  type="button"
         onClick={clickSubmit}>Submit</button>
     </form>
   )
