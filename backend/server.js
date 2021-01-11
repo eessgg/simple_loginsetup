@@ -9,16 +9,16 @@ const app = express();
 
 // middleware
 app.use(express.json());
-app.use(express.urlencoded({extended:false}));
+app.use(express.urlencoded({extended:true }));
 app.use(expressValidator());
 app.use(morgan('dev'));
 app.use(cors());
 
 // connect
 mongoose.connect(database.MONGO_URI, {
-  useNewUrlParser: true,
   useCreateIndex: true,
-  useUnifiedTopology: true
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
 })
 .then(() => console.log(`DB is connected.`))
 .catch(err => console.log(err));
@@ -27,11 +27,13 @@ mongoose.connect(database.MONGO_URI, {
 import authRoutes from './routes/auth_routes.js';
 import userRoutes from './routes/user_routes.js';
 import categoryRoutes from './routes/category_routes.js';
+import productRoutes from './routes/product_routes.js'
 
 // /api/users/register
 app.use('/api', authRoutes)
 app.use('/api', userRoutes)
 app.use('/api', categoryRoutes)
+app.use('/api', productRoutes)
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server working on ${PORT}`))
