@@ -22,10 +22,10 @@ const AdminDashboard = () => {
         <h4 className="card-header">Admin Links</h4>
         <ul className="list-group">
           <li className="list-group-item">
-            <Link className="nav-link" to="/create/category">Create Category</Link>
+            <Link className="nav-link" to="/category/create">Create Category</Link>
           </li>
           <li className="list-group-item">
-            <Link className="nav-link" to="/create/product">Create product</Link>
+            <Link className="nav-link" to="/product/create">Create product</Link>
           </li>
         </ul>
       </div>
@@ -66,6 +66,13 @@ const AdminDashboard = () => {
             {adminLinks()}
           </main>
         </div>
+
+      </div>
+      <div className="container  my-5">
+        <div className="row">
+          aASDDDDASD
+        </div>
+      
       </div>
     </Layout>
   );
